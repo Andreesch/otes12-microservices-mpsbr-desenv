@@ -3,6 +3,7 @@ package com.criasoft.processindicators.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class Company {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
 
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @OrderBy("id DESC")

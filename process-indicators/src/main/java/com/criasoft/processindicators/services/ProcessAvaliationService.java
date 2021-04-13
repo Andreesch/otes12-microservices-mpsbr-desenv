@@ -25,7 +25,7 @@ public class ProcessAvaliationService {
     @Autowired
     private CompanyService companyService;
 
-    private ProcessAvaliationResponseDto create(ProcessAvaliationCreateDto processAvaliationCreateDto) {
+    public ProcessAvaliationResponseDto create(ProcessAvaliationCreateDto processAvaliationCreateDto) {
         Process relatedProcess = processService.findById(processAvaliationCreateDto.getProcessId());
         Company relatedCompany = companyService.findById(processAvaliationCreateDto.getCompanyId());
 

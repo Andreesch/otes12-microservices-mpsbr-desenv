@@ -3,18 +3,20 @@ package com.criasoft.processindicators.domain;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.criasoft.processindicators.api.dto.ProcessAvaliationResponseDto;
 
+@Entity
+@Table(name="PROCESS_AVALIATION")
 public class ProcessAvaliation {
 
     @Id
@@ -24,10 +26,6 @@ public class ProcessAvaliation {
 
     @Column(name = "GRADE", nullable = false)
     private ScoreGrade scoreGrade;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "PROCESS_TYPE", nullable = false)
-    private ProcessType processType;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "COMPANY_ID", referencedColumnName = "ID", nullable = false)
@@ -61,15 +59,6 @@ public class ProcessAvaliation {
 
     public ProcessAvaliation setScoreGrade(ScoreGrade scoreGrade) {
         this.scoreGrade = scoreGrade;
-        return this;
-    }
-
-    public ProcessType getProcessType() {
-        return processType;
-    }
-
-    public ProcessAvaliation setProcessType(ProcessType processType) {
-        this.processType = processType;
         return this;
     }
 

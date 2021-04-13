@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,8 +26,12 @@ public class Process {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
 
-    @Column(name = "GRADE", nullable = false)
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PROCESS_TYPE", nullable = false)
+    private ProcessType processType;
 
     @OrderBy("id DESC")
     @OneToMany(mappedBy = "process", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
@@ -46,6 +52,15 @@ public class Process {
 
     public Process setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public ProcessType getProcessType() {
+        return processType;
+    }
+
+    public Process setProcessType(ProcessType processType) {
+        this.processType = processType;
         return this;
     }
 
