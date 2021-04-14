@@ -1,7 +1,5 @@
 package com.criasoft.processcapacity.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +11,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.criasoft.processcapacity.api.dto.CapacityResponseDto;
-import com.criasoft.processcapacity.services.vo.CapacityVO;
 
 @Entity
 @Table(name = "CAPACITY")
@@ -34,12 +31,15 @@ public class Capacity {
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
+    @Column(name = "ACHIEVED_LEVEL_G", nullable = false)
+    private boolean achievedLevelG;
 
     public static CapacityResponseDto toDto(Capacity capacity) {
         return new CapacityResponseDto()
                 .setId(capacity.getId())
                 .setDescription(capacity.getDescription())
-                .setFinalScore(capacity.getFinalScore());
+                .setFinalScore(capacity.getFinalScore())
+                .setAchievedLevelG(capacity.isAchievedLevelG());
     }
 
     public String getId() {
@@ -75,6 +75,15 @@ public class Capacity {
 
     public Capacity setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public boolean isAchievedLevelG() {
+        return achievedLevelG;
+    }
+
+    public Capacity setAchievedLevelG(boolean achievedLevelG) {
+        this.achievedLevelG = achievedLevelG;
         return this;
     }
 }

@@ -10,6 +10,8 @@ public class CapacityVO {
 
     private ScoreGrade finalScore;
 
+    private boolean achievedLevelG;
+
     public String getDescription() {
         return description;
     }
@@ -34,6 +36,15 @@ public class CapacityVO {
 
     public CapacityVO setFinalScore(ScoreGrade finalScore) {
         this.finalScore = finalScore;
+        return this;
+    }
+
+    public boolean achievedLevelG() {
+        return achievedLevelG;
+    }
+
+    public CapacityVO setAchievedLevelG(boolean achievedLevelG) {
+        this.achievedLevelG = achievedLevelG;
         return this;
     }
 }

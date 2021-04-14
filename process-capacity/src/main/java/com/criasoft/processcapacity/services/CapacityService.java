@@ -14,6 +14,7 @@ import com.criasoft.processcapacity.client.ProcessIndicatorRestClient;
 import com.criasoft.processcapacity.domain.Capacity;
 import com.criasoft.processcapacity.domain.CapacityEnunciate;
 import com.criasoft.processcapacity.domain.ScoreGrade;
+import com.criasoft.processcapacity.helper.AchievedGradeHelper;
 import com.criasoft.processcapacity.repository.CapacityRepository;
 import com.criasoft.processcapacity.services.vo.CapacityVO;
 import com.criasoft.processcapacity.services.vo.ProcessAvaliationSearchResponseVO;
@@ -46,8 +47,8 @@ public class CapacityService {
                     CapacityVO capacityVO = new CapacityVO()
                             .setCompanyId(companyId)
                             .setDescription(capacityEnunciate.enunciate)
-                            .setFinalScore(totalScore);
-
+                            .setFinalScore(totalScore)
+                            .setAchievedLevelG(AchievedGradeHelper.hasAchievedGrade(totalScore));
                     capacityVOs.add(capacityVO);
                 }
 
@@ -70,7 +71,8 @@ public class CapacityService {
         return VOs.stream().map(capacityVO -> new Capacity()
                 .setDescription(capacityVO.getDescription())
                 .setFinalScore(capacityVO.getFinalScore())
-                .setCompanyId(capacityVO.getCompanyId()))
+                .setCompanyId(capacityVO.getCompanyId())
+                .setAchievedLevelG(capacityVO.achievedLevelG()))
                 .collect(Collectors.toList());
     }
 }

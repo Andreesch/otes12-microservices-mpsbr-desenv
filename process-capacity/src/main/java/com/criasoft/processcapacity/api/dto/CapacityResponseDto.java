@@ -10,6 +10,8 @@ public class CapacityResponseDto {
 
     private String description;
 
+    private boolean achievedLevelG;
+
     public String getId() {
         return id;
     }
@@ -34,6 +36,15 @@ public class CapacityResponseDto {
 
     public CapacityResponseDto setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public boolean isAchievedLevelG() {
+        return achievedLevelG;
+    }
+
+    public CapacityResponseDto setAchievedLevelG(boolean achievedLevelG) {
+        this.achievedLevelG = achievedLevelG;
         return this;
     }
 }
