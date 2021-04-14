@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.criasoft.processindicators.api.dto.ProcessAvaliationResponseDto;
+import com.criasoft.processindicators.api.dto.ProcessAvaliationSearchResponseDto;
 
 @Entity
 @Table(name="PROCESS_AVALIATION")
@@ -42,6 +43,13 @@ public class ProcessAvaliation {
         return new ProcessAvaliationResponseDto()
                 .setId(processAvaliation.getId())
                 .setScoreGrade(processAvaliation.getScoreGrade());
+    }
+
+    public static ProcessAvaliationSearchResponseDto toSearchResponseDto(ProcessAvaliation processAvaliation) {
+        return new ProcessAvaliationSearchResponseDto()
+                .setId(processAvaliation.getId())
+                .setScoreGrade(processAvaliation.getScoreGrade())
+                .setProcess(Process.toResponseDto(processAvaliation.getProcess()));
     }
 
     public String getId() {

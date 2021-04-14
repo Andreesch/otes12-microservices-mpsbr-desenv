@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.criasoft.processindicators.api.dto.ProcessResponseDto;
+
 @Table
 @Entity
 public class Process {
@@ -36,6 +38,12 @@ public class Process {
     @OrderBy("id DESC")
     @OneToMany(mappedBy = "process", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<ProcessAvaliation> processAvaliationList;
+
+    public static ProcessResponseDto toResponseDto(Process process) {
+        return new ProcessResponseDto()
+                .setId(process.getId())
+                .setDescription(process.getDescription());
+    }
 
     public String getId() {
         return id;

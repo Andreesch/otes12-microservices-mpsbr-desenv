@@ -1,12 +1,15 @@
 package com.criasoft.processindicators.services;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.criasoft.processindicators.api.dto.ProcessAvaliationCreateDto;
 import com.criasoft.processindicators.api.dto.ProcessAvaliationResponseDto;
+import com.criasoft.processindicators.api.dto.ProcessAvaliationSearchResponseDto;
 import com.criasoft.processindicators.domain.Company;
 import com.criasoft.processindicators.domain.Process;
 import com.criasoft.processindicators.domain.ProcessAvaliation;
@@ -42,5 +45,13 @@ public class ProcessAvaliationService {
                 .setCompany(relatedCompany)
                 .setScoreGrade(grade)
                 .setCreatedAt(LocalDate.now());
+    }
+
+    public List<ProcessAvaliationSearchResponseDto> findByCompanyId(String companyId) {
+        List<ProcessAvaliation> processAvaliationList = processAvaliationRepository.findByCompanyId(companyId);
+
+        return processAvaliationList.stream()
+                .map(ProcessAvaliation::toSearchResponseDto)
+                .collect(Collectors.toList());
     }
 }

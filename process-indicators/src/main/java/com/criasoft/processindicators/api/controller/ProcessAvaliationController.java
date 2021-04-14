@@ -1,8 +1,11 @@
 package com.criasoft.processindicators.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.criasoft.processindicators.api.dto.ProcessAvaliationCreateDto;
 import com.criasoft.processindicators.api.dto.ProcessAvaliationResponseDto;
-import com.criasoft.processindicators.api.dto.ProcessResponseDto;
+import com.criasoft.processindicators.api.dto.ProcessAvaliationSearchResponseDto;
 import com.criasoft.processindicators.services.ProcessAvaliationService;
 
 import io.swagger.annotations.Api;
@@ -38,5 +41,15 @@ public class ProcessAvaliationController {
     public ProcessAvaliationResponseDto create(
             @ApiParam(value = "Descrição do processo", required = true) @RequestBody ProcessAvaliationCreateDto processAvaliationCreateDto) {
         return processAvaliationService.create(processAvaliationCreateDto);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{companyId}")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Successful request with body content", response = ProcessAvaliationSearchResponseDto.class),
+    })
+    @ApiOperation(value = "Buscar avaliações por empresa")
+    public List<ProcessAvaliationSearchResponseDto> findByCode(@ApiParam(value = "Código da empresa", required = true) @PathVariable("companyId") String companyId) {
+        return processAvaliationService.findByCompanyId(companyId);
     }
 }
